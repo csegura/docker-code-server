@@ -1,0 +1,29 @@
+version: "2.1"
+
+services:
+  dev-code-server:
+    image: Dockerfile 
+    container_name: dev-code
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - DEFAULT_WORKSPACE=/config/workspace #optional
+
+    volumes:
+      - /root/code-server:/config
+    ports:
+      - 8443:8443
+    extra_hosts:
+      - tierra:192.168.1.221
+    restart: unless-stopped
+
+networks:
+  lan:
+    driver: macvlan
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          gateway: 192.168.1.1

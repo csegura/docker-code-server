@@ -44,6 +44,10 @@ RUN \
     cd /app/code-server && \
     npm i --production @node-rs/argon2; \
   fi && \
+  echo "**** install docker ****" && \
+  apt-get install -y \
+    docker.io && \
+  docker context create agora --docker "host=ssh://root@192.168.1.200" && \
   echo "**** clean up ****" && \
   apt-get purge --auto-remove -y \
     build-essential \

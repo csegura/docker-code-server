@@ -12,7 +12,7 @@ if [ -z ${PROXY_DOMAIN+x} ]; then
 else
     PROXY_DOMAIN_ARG="--proxy-domain=${PROXY_DOMAIN}"
 fi
-
+chmod 755 /app/code-server/bin/code-server
 exec \
     s6-setuidgid abc \
         /app/code-server/bin/code-server \
